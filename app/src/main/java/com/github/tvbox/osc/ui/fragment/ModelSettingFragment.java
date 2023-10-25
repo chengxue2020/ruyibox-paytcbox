@@ -3,6 +3,7 @@ package com.github.tvbox.osc.ui.fragment;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;//线性布局
 import android.widget.TextView;
 import android.widget.Toast;
