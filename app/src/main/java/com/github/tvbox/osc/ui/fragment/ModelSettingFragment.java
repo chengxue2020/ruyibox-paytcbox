@@ -3,6 +3,7 @@ package com.github.tvbox.osc.ui.fragment;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;//线性布局
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import java.util.List;
 
 import okhttp3.HttpUrl;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
+import me.jessyan.autosize.utils.AutoSizeUtils;//自适应宽高
 
 /**
  * @author pj567
