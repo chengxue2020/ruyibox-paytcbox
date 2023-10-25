@@ -3,7 +3,7 @@ package com.github.tvbox.osc.ui.fragment;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.ViewGroup;//加
 import android.widget.LinearLayout;//线性布局
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,9 +32,9 @@ import com.github.tvbox.osc.util.OkGoHelper;
 import com.github.tvbox.osc.util.PlayerHelper;
 import com.orhanobut.hawk.Hawk;
 
-import com.owen.tvrecyclerview.widget.TvRecyclerView;
-import com.owen.tvrecyclerview.widget.V7GridLayoutManager;
-import com.owen.tvrecyclerview.widget.V7LinearLayoutManager;
+import com.owen.tvrecyclerview.widget.TvRecyclerView;//
+import com.owen.tvrecyclerview.widget.V7GridLayoutManager;//
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
