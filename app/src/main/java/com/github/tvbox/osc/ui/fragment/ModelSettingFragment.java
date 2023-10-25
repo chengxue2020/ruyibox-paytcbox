@@ -139,18 +139,35 @@ public class ModelSettingFragment extends BaseLazyFragment {
             }
         });
 
+        // 1. 选择首页数据多排 ---------------------------------------------------------------- //
         findViewById(R.id.llHomeApi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FastClickCheckUtil.check(v);
-                List<SourceBean> sites = ApiConfig.get().getSourceBeanList();
+                List<SourceBean> sites = new ArrayList<>();
+                sites = ApiConfig.get().getSourceBeanList();
+
                 if (sites.size() > 0) {
                     SelectDialog<SourceBean> dialog = new SelectDialog<>(mActivity);
-                    dialog.setTip("请选择首页数据源");
+
+                    // Multi Column Selection
+                    int spanCount = (int) Math.floor(sites.size() / 10);
+                    if (spanCount <= 1) spanCount = 1;
+                    if (spanCount >= 3) spanCount = 3;
+
+                    TvRecyclerView tvRecyclerView = dialog.findViewById(R.id.list);
+                    tvRecyclerView.setLayoutManager(new V7GridLayoutManager(dialog.getContext(), spanCount));
+                    LinearLayout cl_root = dialog.findViewById(R.id.cl_root);
+                    ViewGroup.LayoutParams clp = cl_root.getLayoutParams();
+                    if (spanCount != 1) {
+                        clp.width = AutoSizeUtils.mm2px(dialog.getContext(), 400 + 260 * (spanCount - 1));
+                    }
+
+                    dialog.setTip(getString(R.string.dia_source));
                     dialog.setAdapter(new SelectDialogAdapter.SelectDialogInterface<SourceBean>() {
                         @Override
                         public void click(SourceBean value, int pos) {
-                            ApiConfig.get().setSourceBean(value);
+                            ApiConfig.get().setSourceBean(value);              
                             tvHomeApi.setText(ApiConfig.get().getHomeSourceBean().getName());
                         }
 
