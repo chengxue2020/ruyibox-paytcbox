@@ -143,10 +143,9 @@ public class ModelSettingFragment extends BaseLazyFragment {
         findViewById(R.id.llHomeApi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FastClickCheckUtil.check(v);
+                FastClickCheckUtil.check(v);				
                 List<SourceBean> sites = new ArrayList<>();
-                sites = ApiConfig.get().getSourceBeanList();
-
+				sites = ApiConfig.get().getSourceBeanList();
                 if (sites.size() > 0) {
                     SelectDialog<SourceBean> dialog = new SelectDialog<>(mActivity);
 
@@ -167,7 +166,7 @@ public class ModelSettingFragment extends BaseLazyFragment {
                     dialog.setAdapter(new SelectDialogAdapter.SelectDialogInterface<SourceBean>() {
                         @Override
                         public void click(SourceBean value, int pos) {
-                            ApiConfig.get().setSourceBean(value);              
+                            ApiConfig.get().setSourceBean(value);
                             tvHomeApi.setText(ApiConfig.get().getHomeSourceBean().getName());
                         }
 
