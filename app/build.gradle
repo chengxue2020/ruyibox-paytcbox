@@ -107,7 +107,7 @@ dependencies {
     implementation 'com.orhanobut:hawk:2.0.1'
     implementation 'com.lzy.net:okgo:3.0.4'
     implementation 'com.owen:tv-recyclerview:3.0.0'
-    implementation 'com.github.getActivity:XXPermissions:13.6'
+    implementation 'com.github.getActivity:XXPermissions:15.0'
 
     //工具箱/不需要混淆？
     implementation 'com.blankj:utilcodex:1.26.0'
