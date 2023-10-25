@@ -3,6 +3,8 @@ package com.github.tvbox.osc.ui.fragment;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;//加
+import android.widget.LinearLayout;//线性布局
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,10 @@ import com.github.tvbox.osc.util.OkGoHelper;
 import com.github.tvbox.osc.util.PlayerHelper;
 import com.orhanobut.hawk.Hawk;
 
+import com.owen.tvrecyclerview.widget.TvRecyclerView;//
+import com.owen.tvrecyclerview.widget.V7GridLayoutManager;//
+
+
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +44,7 @@ import java.util.List;
 
 import okhttp3.HttpUrl;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
+import me.jessyan.autosize.utils.AutoSizeUtils;//自适应宽高
 
 /**
  * @author pj567
@@ -131,18 +138,36 @@ public class ModelSettingFragment extends BaseLazyFragment {
                 jumpActivity(AboutActivity.class);
             }
         });
+
+        // 1. 选择首页数据多排 ---------------------------------------------------------------- //
         findViewById(R.id.llHomeApi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FastClickCheckUtil.check(v);
-                List<SourceBean> sites = ApiConfig.get().getSourceBeanList();
+                List<SourceBean> sites = new ArrayList<>();
+                sites = ApiConfig.get().getSourceBeanList();
+
                 if (sites.size() > 0) {
                     SelectDialog<SourceBean> dialog = new SelectDialog<>(mActivity);
-                    dialog.setTip("请选择首页数据源");
+
+                    // Multi Column Selection
+                    int spanCount = (int) Math.floor(sites.size() / 10);
+                    if (spanCount <= 1) spanCount = 1;
+                    if (spanCount >= 3) spanCount = 3;
+
+                    TvRecyclerView tvRecyclerView = dialog.findViewById(R.id.list);
+                    tvRecyclerView.setLayoutManager(new V7GridLayoutManager(dialog.getContext(), spanCount));
+                    LinearLayout cl_root = dialog.findViewById(R.id.cl_root);
+                    ViewGroup.LayoutParams clp = cl_root.getLayoutParams();
+                    if (spanCount != 1) {
+                        clp.width = AutoSizeUtils.mm2px(dialog.getContext(), 400 + 260 * (spanCount - 1));
+                    }
+
+                    dialog.setTip(getString(R.string.dia_source));
                     dialog.setAdapter(new SelectDialogAdapter.SelectDialogInterface<SourceBean>() {
                         @Override
                         public void click(SourceBean value, int pos) {
-                            ApiConfig.get().setSourceBean(value);
+                            ApiConfig.get().setSourceBean(value);              
                             tvHomeApi.setText(ApiConfig.get().getHomeSourceBean().getName());
                         }
 
@@ -165,6 +190,8 @@ public class ModelSettingFragment extends BaseLazyFragment {
                 }
             }
         });
+
+        
         findViewById(R.id.llDns).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
