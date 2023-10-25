@@ -131,6 +131,7 @@ public class ModelSettingFragment extends BaseLazyFragment {
                 jumpActivity(AboutActivity.class);
             }
         });
+
         // 1. 选择首页数据多排 ---------------------------------------------------------------- //
         findViewById(R.id.llHomeApi).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,9 +139,7 @@ public class ModelSettingFragment extends BaseLazyFragment {
                 FastClickCheckUtil.check(v);
                 List<SourceBean> sites = new ArrayList<>();
                 sites = ApiConfig.get().getSourceBeanList();
-                //for (SourceBean sb : ApiConfig.get().getSourceBeanList()) {
-                //    if (sb.getHide() == 0) sites.add(sb);
-                //}
+
                 if (sites.size() > 0) {
                     SelectDialog<SourceBean> dialog = new SelectDialog<>(mActivity);
 
@@ -161,16 +160,7 @@ public class ModelSettingFragment extends BaseLazyFragment {
                     dialog.setAdapter(new SelectDialogAdapter.SelectDialogInterface<SourceBean>() {
                         @Override
                         public void click(SourceBean value, int pos) {
-                            ApiConfig.get().setSourceBean(value);
-                /*
-                if (sites.size() > 0) {
-                    SelectDialog<SourceBean> dialog = new SelectDialog<>(mActivity);
-                    dialog.setTip("请选择首页数据源");
-                    dialog.setAdapter(new SelectDialogAdapter.SelectDialogInterface<SourceBean>() {
-                        @Override
-                        public void click(SourceBean value, int pos) {
-
-                            ApiConfig.get().setSourceBean(value);*/
+                            ApiConfig.get().setSourceBean(value);              
                             tvHomeApi.setText(ApiConfig.get().getHomeSourceBean().getName());
                         }
 
@@ -193,6 +183,8 @@ public class ModelSettingFragment extends BaseLazyFragment {
                 }
             }
         });
+
+        
         findViewById(R.id.llDns).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
