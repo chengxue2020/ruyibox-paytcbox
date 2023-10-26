@@ -66,6 +66,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.prefs.PreferenceChangeEvent;
 
+import java.util.Random;//引用随机类
 /**
  * @author pj567
  * @date :2021/3/9
