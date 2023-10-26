@@ -66,7 +66,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.prefs.PreferenceChangeEvent;
 
-import java.util.Random;//引用随机类
+import java.util.Collections;//用来打乱顺序
 /**
  * @author pj567
  * @date :2021/3/9
@@ -333,44 +333,18 @@ public class UserFragment extends BaseLazyFragment implements View.OnClickListen
                     }
                 });
     }
-/*
+
     private void showAdv(AdvBean advBean) {
-        advList = advBean.msg;
+        advList = advBean.msg;      
         if (advList != null) {
+        Collections.shuffle(advList); // 打乱列表顺序 
             for (int i = 0; i < advList.size(); i++) {
                 showAdvData(advList, i);
             }
         }
     }
-*/
 
-private void showAdv(AdvBean advBean) {//随机打乱显示图片  
-    advList = advBean.msg;  
-    Random random = new Random();  
-    int randomIndex;  
-  
-    do {  
-        randomIndex = random.nextInt(advList.size());  
-    } while (isDuplicateIndex(randomIndex));  
-  
-    if (advList != null) {  
-        showAdvData(advList, randomIndex);  
-    }  
-}  
-  
-private boolean isDuplicateIndex(int randomIndex) {// 检查随机索引是否已经存在  
-      
-    for (int i = 0; i < advList.size(); i++) {  
-        if (i == randomIndex) {  
-            continue; // 忽略当前索引  
-        }  
-        if (advList.get(i).equals(advList.get(randomIndex))) {  
-            return true; // 找到重复的广告对象  
-        }  
-    }  
-    return false; // 没有找到重复的广告对象  
-}
-    
+
     /**
      * 根据顺序加载数据
      *
